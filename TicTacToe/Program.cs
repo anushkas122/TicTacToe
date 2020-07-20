@@ -13,13 +13,15 @@ namespace TicTacToe
         public Game()
         {
             board = new string[3,3] { { " ", " ", " " }, { " ", " ", " " }, { " ", " ", " " } }; 
-            currentPlayer = 1;
+            currentPlayer = 1;  //player 1 is 'X', player 2 is 'O'
             end = false;
         }
+        /* resets board is players want a rematch */
         public void clearBoard()
         {
             board = new string[3, 3] { { " ", " ", " " }, { " ", " ", " " }, { " ", " ", " " } };
         }
+        /* adds player's move to board*/
         private void addMove(int row, int col)
         {
             string move = "X";
@@ -27,8 +29,10 @@ namespace TicTacToe
             {
                 move = "O";
             }
-            board[row, col] = move;
+            board[row, col] = move;   //sets place on board with appropriate symbol for player
         }
+        /* checks that the player has specificed a valid position on board
+           and that spot hasn't been played already */
         public bool validMove(int row, int col)
         {
             if (row < 0 || row > 2 || col < 0 || col > 2)
@@ -41,11 +45,13 @@ namespace TicTacToe
             }
             return true;
         }
+        /* changes active player */
         private void setPlayer()
         {
             currentPlayer = (currentPlayer == 1) ? currentPlayer = 2 : currentPlayer = 1;
             Console.WriteLine("Player {0}, your turn", currentPlayer.ToString());
         }
+        /* checks after each round if the board is filled and thus a tie */
         private void fullBoard()
         {
             bool full = true;
@@ -63,6 +69,7 @@ namespace TicTacToe
                 Console.WriteLine("Tie Game! Would you like to play another round? y/n");
             }
         }
+        /* checks for three in a row */
         private void gameisWon()
         {
             bool threeInARow = false;
@@ -132,7 +139,7 @@ namespace TicTacToe
                 end = true;
             }
         }
-
+        /* prints out a basic board to the console */
         private void printBoard()
         {
             Console.WriteLine("\n");
@@ -144,6 +151,7 @@ namespace TicTacToe
             }
 
         }
+        /* runs the game by promting the user to choose row and columns on the board */
         public void startGame()
         {
             end = false;
