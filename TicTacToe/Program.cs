@@ -154,30 +154,29 @@ namespace TicTacToe
         /* runs the game by promting the user to choose row and columns on the board */
         public void startGame()
         {
-            end = false;
+            end = false;   //is board full or is there a three in a row?
             currentPlayer = 1;
-            int row, col;
 
             Console.WriteLine("Player {0}, your turn", currentPlayer.ToString());
             while (!end)
             {
                 Console.WriteLine("Row number between 0-2: ");
-                bool valid = Int32.TryParse(Console.ReadLine(), out row);
-                while(!valid)
+                bool valid = Int32.TryParse(Console.ReadLine(), out int row);
+                while(!valid)  //checks that value entered by user is a valid number
                 {
-                    Console.WriteLine("Invalid row number, please choose a row number between 0-2");
+                    Console.WriteLine("Invalid row number, please choose a row number between 0-2");  //row number
                     Console.WriteLine("Row: ");
                     valid = Int32.TryParse(Console.ReadLine(), out row);
                 }
                 Console.WriteLine("Column number between 0-2: ");
-                valid = Int32.TryParse(Console.ReadLine(), out col);
+                valid = Int32.TryParse(Console.ReadLine(), out int col);
                 while (!valid)
                 {
-                    Console.WriteLine("Invalid column number, please choose a column number between 0-2");
+                    Console.WriteLine("Invalid column number, please choose a column number between 0-2");   //column number
                     Console.WriteLine("Column: ");
                     valid = Int32.TryParse(Console.ReadLine(), out row);
                 }
-                if(validMove(row, col))
+                if(validMove(row, col))  //checks that move can be made by player
                 {
                     addMove(row, col);
                     printBoard();
@@ -188,14 +187,13 @@ namespace TicTacToe
                     }
                     if (!end)
                     {
-                        setPlayer();
+                        setPlayer();  //board isn't full and there's no winner, so swap player and continue
                     }
                 } else
                 {
                     Console.WriteLine("Invalid move, please choose a row and column each between 0-2");
                 }
             }
-            return;
         }
     }
     class Program
@@ -206,14 +204,11 @@ namespace TicTacToe
             Game game = new Game();
             game.startGame();
             string newGame = Console.ReadLine();
-            while (newGame == "y" || newGame == "yes")
+            while (newGame == "y" || newGame == "yes")  //start a new game until user specifies they don't want a new game
             {
                 game.clearBoard();
                 game.startGame();
                 newGame = Console.ReadLine();
-            }
-            {
-
             }
         }
     }
